@@ -27,7 +27,7 @@ def sent():
             else: doc1.insert_pdf(doc, to_page = 0)
             doc1.save(file_name + ".pdf")
             os.remove('./' + f)
-        return send_file('./' + file_name + '.pdf', as_attachment=True)
+        return send_file( '../' + file_name + '.pdf', as_attachment=True)
     return render_template('index.html')
 if __name__ == '__main__':
     app.run(debug=True)
