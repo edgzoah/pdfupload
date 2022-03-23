@@ -14,24 +14,21 @@ app.config['UPLOAD_FOLDER'] = './templates'
 @app.route('/', methods=['POST', 'GET'])
 def sent():
     if request.method == 'POST':
-        if request.form['page']:
-            print(request.form['page'])
         uploaded_files = request.files.getlist('file')
         doc1 = fitz.open()
         now1 = datetime.now()
         d1 = now1.strftime("%d.%m.%Y")
         current_time = now1.strftime("%H:%M:%S")
-        fajnie = str(d1) + ':' + str(current_time)
+        file_name = str(d1) + ':' + str(current_time)
         for i in uploaded_files:
             f = secure_filename(i.filename)
             i.save(f)
             doc = fitz.open(f)
-            # if request.form['page']: doc1.insert_pdf(doc, from_page = doc.page_count)
-            # else: doc1.insert_pdf(doc, to_page = 0)
-            doc1.insert_pdf(doc, to_page = 0)
-            doc1.save(fajnie + ".pdf")
-            os.remove('/home/adam/pdf/pdfupload/' + f)
-        return send_file('./' + fajnie + '.pdf', as_attachment=True)
+            if request.form['page_num'] == 'last': doc1.insert_pdf(doc, from_page = doc.page_count)
+            else: doc1.insert_pdf(doc, to_page = 0)
+            doc1.save(file_name + ".pdf")
+            os.remove('./' + f)
+        return send_file('./' + file_name + '.pdf', as_attachment=True)
     return render_template('index.html')
 if __name__ == '__main__':
     app.run(debug=True)

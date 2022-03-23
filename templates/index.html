@@ -7,16 +7,16 @@
     <title>Document</title>
   </head>
   <body>
-    <form action="/" method="post" enctype=multipart/form-data>
+    <form action="/" method="post" enctype=multipart/form-data id="page">
       <input type="file" name="file" id="file" multiple="multiple" />
       <br>
       <input type="submit" value="" />
       <br>
       <br>
       ostatnia strona?
-      <select name="" id="">
-        <option value="guwno">fajnie</option>
-        <option value="guwno1">no fajnie</option>
+      <select name="page_num" id="page_num" form="page">
+        <option value="first">First page</option>
+        <option value="last">Last page</option>
       </select>
     </form>
   </body>
