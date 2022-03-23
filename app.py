@@ -12,7 +12,7 @@ app.config['SECRET_KEY'] = 'F3HUIF23H8923F9H8389FHXKLN'
 @app.route('/', methods=['POST', 'GET'])
 def sent():
     if request.method == 'POST':
-        uploaded_files = request.files.getlist('file')
+        uploaded_files = request.files.getlist('files[]')
         doc1 = fitz.open()
         now1 = datetime.now()
         d1 = now1.strftime("%d%m%Y")
