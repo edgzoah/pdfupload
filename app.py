@@ -1,3 +1,5 @@
+#pip install pymupdf
+#pip install flask
 from flask import Flask , request , render_template , send_file
 import os
 from werkzeug.utils import secure_filename
