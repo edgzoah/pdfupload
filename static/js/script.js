@@ -51,13 +51,13 @@ function uploadPDFs(event) {
     formData.append(PDFinput.name, file, file.name);
   }
   var xhr = new XMLHttpRequest();
-
   xhr.open(formdrop.method, formdrop.action, true);
   xhr.setRequestHeader('fajne', nameValue);
   xhr.onreadystatechange = function(data) {
-    window.location.href = xhr.response
+    if (xhr.response !== "") {
+      window.location.href = xhr.response
+    }
   };
-  console.log(formData)
   xhr.send(formData);
 }
 
