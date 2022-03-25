@@ -9,6 +9,7 @@ var uploadPDFStatus = document.getElementById("uploadPDFStatus");
 // Zmienna do wrzuconych już PDF 
 var droppedPDF;
 
+
 // Eeee, nie wiem co to ale podobno będzie działać, tak mówi stackoverflow
 function overrideDefault(event) {
   event.preventDefault();
@@ -41,23 +42,25 @@ function showFiles(files) {
 }
 
 function uploadPDFs(event) {
+  
   event.preventDefault();
   changeStatusupload("Uploading...");
-
+  var nameValue = document.getElementById("sraka").checked;
   var formData = new FormData();
-
   for (var i = 0, file; (file = droppedPDF[i]); i++) {
     formData.append(PDFinput.name, file, file.name);
   }
-
   var xhr = new XMLHttpRequest();
+
+  xhr.open(formdrop.method, formdrop.action, true);
+  xhr.setRequestHeader('fajne', nameValue);
   xhr.onreadystatechange = function(data) {
     // Tak mówi overstack flow
     //handle server response and change status of
     //upload process via changeStatus(text)
     console.log(xhr.response);
   };
-  xhr.open(formdrop.method, formdrop.action, true);
+  console.log(formData)
   xhr.send(formData);
 }
 

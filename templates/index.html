@@ -10,8 +10,8 @@
 
 <body>
     
-    <form id="formdrop" style="margin-left: auto; margin-right: auto; margin-top: 150px;" method="post" onsubmit="uploadPDFs(event)">
-        <input type="file" name="PDFs[]" id="PDFinput" multiple onchange="addfilesdatatoserver(event)">
+    <form id="formdrop" enctype="multipart/form-data" action="/" style="margin-left: auto; margin-right: auto; margin-top: 150px;" method="post" onsubmit="uploadPDFs(event)">
+        <input type="file" name="PDFs[]" id="PDFinput" multiple="multiple" onchange="addfilesdatatoserver(event)">
         <label for="PDFinput" id="textfromfile" ondragover="overrideDefault(event);movefile();" ondragenter="overrideDefault(event);movefile();" ondragleave="overrideDefault(event);movefileEnd();" ondrop="overrideDefault(event);movefileEnd();
               addfilesdatatoserver(event);">
           <i class="fa fa-download fa-5x"></i>
@@ -22,7 +22,10 @@
           <br>
           <span id="uploadPDFStatus"></span>
         </label>
-      
+        <label class="switch">
+          <input type="checkbox" id="sraka">
+          <span class="slider round"></span>
+        </label>
         <input type="submit" value="Upload" class="buttonupload">
       </form>
     <script src="{{url_for('static', filename='js/script.js')}}"></script>
