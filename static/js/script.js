@@ -1,31 +1,66 @@
-var dropFileForm = document.getElementById("dropFileForm");
-var fileLabelText = document.getElementById("fileLabelText");
-var uploadStatus = document.getElementById("uploadStatus");
-var fileInput = document.getElementById("fileInput");
-var droppedFiles;
+// Wrzucanie pliku do forma
+var formdrop = document.getElementById("formdrop");
+// Input typu file
+var PDFinput = document.getElementById("PDFinput");
+// Zmiena na spana z nazwą pliku (pdf) 
+var textfromfile = document.getElementById("textfromfile");
+// Status uploadu PDF 
+var uploadPDFStatus = document.getElementById("uploadPDFStatus");
+// Zmienna do wrzuconych już PDF 
+var droppedPDF;
 
+// Eeee, nie wiem co to ale podobno będzie działać, tak mówi stackoverflow
 function overrideDefault(event) {
   event.preventDefault();
   event.stopPropagation();
 }
 
-function fileHover() {
-  dropFileForm.classList.add("fileHover");
+// Przenoszenie i dodawanie naszego pliku poprzez input do forma 
+function movefile() {
+  formdrop.classList.add("movefile");
 }
-
-function fileHoverEnd() {
-  dropFileForm.classList.remove("fileHover");
+// Usuwanie naszego pliku z forma po skończeniu "uploadu" 
+function movefileEnd() {
+  formdrop.classList.remove("movefile");
 }
-
-function addFiles(event) {
-  droppedFiles = event.target.files || event.dataTransfer.files;
-  showFiles(droppedFiles);
+// Transfer/dodawanie danych/plików na server 
+function addfilesdatatoserver(event) {
+  droppedPDF = event.target.files || event.dataTransfer.files;
+  showFiles(droppedPDF);
 }
-
+// Funkcja pokazywania PDF (jeśli pdf < 2)
 function showFiles(files) {
+  // Sprawdzanie ilości wrzuconych PDF (1 czy więcej)
   if (files.length > 1) {
-    fileLabelText.innerText = files.length + " files selected";
+      // Ilość PDF wrzuconych (Opcja PDF ≥ 2)
+    textfromfile.innerText = files.length + " files selected";
   } else {
-    fileLabelText.innerText = files[0].name;
+      // Nazwa wrzuconego "jednego" PDF
+    textfromfile.innerText = files[0].name;
   }
+}
+
+function uploadPDFs(event) {
+  event.preventDefault();
+  changeStatusupload("Uploading...");
+
+  var formData = new FormData();
+
+  for (var i = 0, file; (file = droppedPDF[i]); i++) {
+    formData.append(PDFinput.name, file, file.name);
+  }
+
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function(data) {
+    // Tak mówi overstack flow
+    //handle server response and change status of
+    //upload process via changeStatus(text)
+    console.log(xhr.response);
+  };
+  xhr.open(formdrop.method, formdrop.action, true);
+  xhr.send(formData);
+}
+
+function changeStatusupload(text) {
+  uploadPDFStatus.innerText = text;
 }
