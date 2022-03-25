@@ -55,10 +55,7 @@ function uploadPDFs(event) {
   xhr.open(formdrop.method, formdrop.action, true);
   xhr.setRequestHeader('fajne', nameValue);
   xhr.onreadystatechange = function(data) {
-    // Tak mówi overstack flow
-    //handle server response and change status of
-    //upload process via changeStatus(text)
-    console.log(xhr.response);
+    window.location.href = xhr.response
   };
   console.log(formData)
   xhr.send(formData);
