@@ -3,11 +3,17 @@
   margin-right: auto;
 }
 
-.switch {
+.switch-button {
   position: relative;
-  display: inline-block;
+}
+
+.switch {
+  position: absolute;
+  top: 200%;
   width: 60px;
+  left: 50%;
   height: 34px;
+  transform: translate(-50%, -50%);
 }
 
 .switch input { 
