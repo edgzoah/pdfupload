@@ -19,21 +19,21 @@
           <span id="textfromfile">
             Wybierz PDF/PDFy klikając bądź przeciągając tutaj
           </span>
-          <span>
-            Turn Off - Pierwsza strona | Turn On - Ostatnia strona 
-          </span>
+          <br>
+          <span id="uploadPDFStatus"></span>
+        </label>
+        <span>
+          Turn Off - Pierwsza strona | Turn On - Ostatnia strona 
+        </span>
+        <h1 style="color: white; font-size: 130%;">.</h1>
+        <div class="switch-button">
           <label class="switch">
             <input type="checkbox" id="sraka" fxorm="formdrop">
             <span class="slider round"></span>
           </label>
-          <h1></h1>
-          <br>
-          <span id="uploadPDFStatus"></span>
-        </label>
+        </div>
+        <h2 style="color: white; font-size: 70%;">.</h1>
         <input type="submit" value="Upload" class="buttonupload">
       </form>
-    <div class="switch-button">
-
-    </div>
     <script src="{{url_for('static', filename='js/script.js')}}"></script>
 </body>
