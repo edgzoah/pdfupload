@@ -1,42 +1,33 @@
-// Wrzucanie pliku do forma
 var formdrop = document.getElementById("formdrop");
-// Input typu file
 var PDFinput = document.getElementById("PDFinput");
-// Zmiena na spana z nazwą pliku (pdf) 
 var textfromfile = document.getElementById("textfromfile");
-// Status uploadu PDF 
 var uploadPDFStatus = document.getElementById("uploadPDFStatus");
-// Zmienna do wrzuconych już PDF 
 var droppedPDF;
 
+if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+  document.getElementById("web").style.display = "none";
+  document.getElementById("mobile").style.display = "flex";
+ }
 
-// Eeee, nie wiem co to ale podobno będzie działać, tak mówi stackoverflow
 function overrideDefault(event) {
   event.preventDefault();
   event.stopPropagation();
 }
 
-// Przenoszenie i dodawanie naszego pliku poprzez input do forma 
 function movefile() {
   formdrop.classList.add("movefile");
 }
-// Usuwanie naszego pliku z forma po skończeniu "uploadu" 
 function movefileEnd() {
   formdrop.classList.remove("movefile");
 }
-// Transfer/dodawanie danych/plików na server 
 function addfilesdatatoserver(event) {
   droppedPDF = event.target.files || event.dataTransfer.files;
   showFiles(droppedPDF);
 }
-// Funkcja pokazywania PDF (jeśli pdf < 2)
 function showFiles(files) {
-  // Sprawdzanie ilości wrzuconych PDF (1 czy więcej)
   if (files.length > 1) {
-      // Ilość PDF wrzuconych (Opcja PDF ≥ 2)
     textfromfile.innerText = files.length + " files selected";
   } else {
-      // Nazwa wrzuconego "jednego" PDF
     textfromfile.innerText = files[0].name;
   }
 }
