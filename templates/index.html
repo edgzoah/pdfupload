@@ -1,55 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="#">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}">
-  <title>PDF Upload</title>
-</head>
-<body>
-  <div class="mobile" style="display: none;">
-    <h1>Strona nie wspiera urządzeń mobilnych</h1>
-  </div>
-  <div class="web">
-    <div class="col-md-8">
-      <form id="formdrop" enctype="multipart/form-data" action="/" method="post" onsubmit="uploadPDFs(event)">
-        <div class="custom-control custom-switch">
-          <input type="checkbox" class="custom-control-input" id="customSwitches">
-          <label class="custom-control-label" for="customSwitches"></label>
-        </div>
-        <div class="tekst">
-          <p>Pierwsza strona | Ostatnia strona</p>
-        </div>
-        <div class="footer1">
-        <input type="file" name="PDFs[]" id="PDFinput" multiple="multiple" onchange="addfilesdatatoserver(event)">
-      </div>
-        <label for="PDFinput" id="textfromfile" ondragover="overrideDefault(event);movefile();" ondragenter="overrideDefault(event);movefile();" ondragleave="overrideDefault(event);movefileEnd();" ondrop="overrideDefault(event);movefileEnd();
-              addfilesdatatoserver(event);">
-              <div class="uploadtext">Select a file or drag here</div>
-        </label>
-<div class="footer">
-
-
-
-<div class="footer2">
-        <input class="btn btn-primary buttonupload" type="submit" value="Submit">
-      </div>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="#" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='css/main.css') }}"
+    />
+    <title>PDF Upload</title>
+  </head>
+  <body>
+    <div class="mobile" style="display: none">
+      <h1>Strona nie wspiera urządzeń mobilnych</h1>
     </div>
-      </form>
-    </div>
+    <div class="web">
+      <div class="col-md-8">
+        <form
+          id="formdrop"
+          enctype="multipart/form-data"
+          action="/"
+          method="post"
+          onsubmit="uploadPDFs(event)"
+        >
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="customSwitches"
+            />
+            <label class="custom-control-label" for="customSwitches"></label>
+          </div>
+          <div class="tekst">
+            <p>Pierwsza strona | Ostatnia strona</p>
+          </div>
+          <div class="footer1">
+            <input
+              type="file"
+              name="PDFs[]"
+              id="PDFinput"
+              multiple="multiple"
+              onchange="addfilesdatatoserver(event)"
+            />
+          </div>
+          <label
+            for="PDFinput"
+            id="textfromfile"
+            ondragover="overrideDefault(event);movefile();"
+            ondragenter="overrideDefault(event);movefile();"
+            ondragleave="overrideDefault(event);movefileEnd();"
+            ondrop="overrideDefault(event);movefileEnd();
+              addfilesdatatoserver(event);"
+          >
+            <div class="uploadtext">Select a file or drag here</div>
+          </label>
+          <div class="footer">
+            <div class="footer2">
+              <input
+                class="btn btn-primary buttonupload"
+                type="submit"
+                value="Submit"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
     <span id="uploadPDFStatus"></span>
     <i class="fa fa-download fa-5x"></i>
-
-
-
-  <script src="{{url_for('static', filename='js/script.js')}}"></script>
-</body>
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
+  </body>
 </html>
