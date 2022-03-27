@@ -1,6 +1,5 @@
 #pip install pymupdf
 #pip install flask
-from django.shortcuts import redirect
 from flask import Flask , request , render_template , send_file, after_this_request, flash
 import os
 from werkzeug.utils import secure_filename
