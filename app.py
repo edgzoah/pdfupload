@@ -37,7 +37,6 @@ def pdf(pdf):
     def remove_file(response):
         try:
             os.remove(pdf)
-            file_handle.close()
         except Exception as error:
             app.logger.error("Error removing or closing downloaded file handle", error)
         return response
