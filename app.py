@@ -1,6 +1,6 @@
 #pip install pymupdf
 #pip install flask
-from flask import Flask , request , render_template , send_file
+from flask import Flask , request , render_template , send_file, after_this_request
 import os
 from werkzeug.utils import secure_filename
 from datetime import datetime
@@ -11,6 +11,7 @@ app.config['SECRET_KEY'] = 'F3HUIF23H8923F9H8389FHXKLN'
 
 @app.route('/', methods=['POST', 'GET'])
 def sent():
+    global doc1
     if request.method == 'POST':
         uploaded_files = request.files.getlist('PDFs[]')
         doc1 = fitz.open()
@@ -32,7 +33,17 @@ def sent():
 
 @app.route('/<pdf>')
 def pdf(pdf):
+    @after_this_request
+    def remove_file(response):
+        try:
+            os.remove(pdf)
+            file_handle.close()
+        except Exception as error:
+            app.logger.error("Error removing or closing downloaded file handle", error)
+        return response
     return send_file('./' + pdf, as_attachment=True)
+
+
 
 
 if __name__ == '__main__':
