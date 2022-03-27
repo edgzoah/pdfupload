@@ -1,43 +1,55 @@
 <!DOCTYPE html>
-
+<html lang="en">
 <head>
-  <title>PDF Sorting</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta charset="utf-8">
-  <link rel="shortcut icon" href="/assets/favicon.ico">
-  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/main.css') }}">
+  <link rel="shortcut icon" href="#">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}">
+  <title>PDF Upload</title>
 </head>
-
 <body>
   <div class="mobile" style="display: none;">
     <h1>Strona nie wspiera urządzeń mobilnych</h1>
   </div>
   <div class="web">
-    <form id="formdrop" enctype="multipart/form-data" action="/" style="margin-left: auto; margin-right: auto; margin-top: 150px;" method="post" onsubmit="uploadPDFs(event)">
+    <div class="col-md-8">
+      <form id="formdrop" enctype="multipart/form-data" action="/" method="post" onsubmit="uploadPDFs(event)">
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="customSwitches">
+          <label class="custom-control-label" for="customSwitches"></label>
+        </div>
+        <div class="tekst">
+          <p>Pierwsza strona | Ostatnia strona</p>
+        </div>
+        <div class="footer1">
         <input type="file" name="PDFs[]" id="PDFinput" multiple="multiple" onchange="addfilesdatatoserver(event)">
+      </div>
         <label for="PDFinput" id="textfromfile" ondragover="overrideDefault(event);movefile();" ondragenter="overrideDefault(event);movefile();" ondragleave="overrideDefault(event);movefileEnd();" ondrop="overrideDefault(event);movefileEnd();
               addfilesdatatoserver(event);">
-          <i class="fa fa-download fa-5x"></i>
-          <br>
-          <span id="textfromfile">
-            Wybierz PDF/PDFy klikając bądź przeciągając tutaj
-          </span>
-          <br>
-          <span id="uploadPDFStatus"></span>
+              <div class="uploadtext">Select a file or drag here</div>
         </label>
-        <span>
-          Turn Off - Pierwsza strona | Turn On - Ostatnia strona 
-        </span>
-        <h1 style="color: white; font-size: 130%;">.</h1>
-        <div class="switch-button">
-          <label class="switch">
-            <input type="checkbox" id="sraka" fxorm="formdrop">
-            <span class="slider round"></span>
-          </label>
-        </div>
-        <h2 style="color: white; font-size: 70%;">.</h1>
-        <input type="submit" value="Upload" class="buttonupload">
+<div class="footer">
+
+
+
+<div class="footer2">
+        <input class="btn btn-primary buttonupload" type="submit" value="Submit">
+      </div>
+
+    </div>
       </form>
-  </div>
-    <script src="{{url_for('static', filename='js/script.js')}}"></script>
+    </div>
+    </div>
+    <span id="uploadPDFStatus"></span>
+    <i class="fa fa-download fa-5x"></i>
+
+
+
+  <script src="{{url_for('static', filename='js/script.js')}}"></script>
 </body>
+</html>

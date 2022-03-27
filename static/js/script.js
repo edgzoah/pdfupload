@@ -4,10 +4,11 @@ var textfromfile = document.getElementById("textfromfile");
 var uploadPDFStatus = document.getElementById("uploadPDFStatus");
 var droppedPDF;
 
-if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-  document.getElementById("web").style.display = "none";
-  document.getElementById("mobile").style.display = "flex";
- }
+// if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+//   alert(1)
+//  } else {
+//    alert(2)
+//  }
 
 function overrideDefault(event) {
   event.preventDefault();
@@ -26,17 +27,16 @@ function addfilesdatatoserver(event) {
 }
 function showFiles(files) {
   if (files.length > 1) {
-    textfromfile.innerText = files.length + " files selected";
+    textfromfile.innerHTML = '<div class="uploadtext">' + files.length + " files selected" + '</div>';
   } else {
-    textfromfile.innerText = files[0].name;
+    textfromfile.innerHTML = '<div class="uploadtext">' + files[0].name + '</div>';
   }
 }
 
 function uploadPDFs(event) {
   
   event.preventDefault();
-  changeStatusupload("Uploading...");
-  var nameValue = document.getElementById("sraka").checked;
+  var nameValue = document.getElementById("customSwitches").checked;
   var formData = new FormData();
   for (var i = 0, file; (file = droppedPDF[i]); i++) {
     formData.append(PDFinput.name, file, file.name);
@@ -52,6 +52,3 @@ function uploadPDFs(event) {
   xhr.send(formData);
 }
 
-function changeStatusupload(text) {
-  uploadPDFStatus.innerText = text;
-}
