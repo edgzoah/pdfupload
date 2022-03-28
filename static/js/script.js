@@ -52,5 +52,5 @@ function uploadPDFs(event) {
 }
 
 function changeStatusupload(text) {
-  textfromFile.innerHTML = '<div class="uploadtext">' + text + '</div>';
+  textfromfile.innerHTML = '<div class="uploadtext">' + text + '</div>';
 }
