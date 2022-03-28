@@ -17,13 +17,14 @@
       href="{{ url_for('static',filename='css/main.css') }}"
     />
     <title>PDF Upload</title>
+
   </head>
   <body>
-    <div class="mobile" style="display: none">
-      <h1>Strona nie wspiera urządzeń mobilnych</h1>
-    </div>
     <div class="web">
       <div class="col-md-8">
+       
+          <h3 id="mobile" style="display: none;">Strona nie wspiera urządzeń mobilnych</h3>
+        
         <form
           id="formdrop"
           enctype="multipart/form-data"
@@ -68,6 +69,7 @@
                 class="btn btn-primary buttonupload"
                 type="submit"
                 value="Submit"
+                id="ok"
               />
             </div>
           </div>
@@ -76,6 +78,11 @@
     </div>
     <span id="uploadPDFStatus"></span>
     <i class="fa fa-download fa-5x"></i>
+    <script>
+      if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        document.getElementById('mobile').style.display = "block"
+      }
+    </script>
     <script src="{{url_for('static', filename='js/script.js')}}"></script>
   </body>
 </html>
