@@ -34,9 +34,9 @@ body        { padding: 2rem; background: #f8f8f8;}
 
 .footer {
   width: 100vw;
-  position: fixed;
+  position: absolute;
   left: 50%;
-  bottom: 0;
+  bottom: -10;
   margin-left: -50vw;
 }
 
@@ -74,7 +74,6 @@ body        { padding: 2rem; background: #f8f8f8;}
 .footer2 {
   display: flex;
   justify-content: center;
-  padding: 1rem;
 }
 
 .body {
