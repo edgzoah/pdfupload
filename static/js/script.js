@@ -32,6 +32,7 @@ function showFiles(files) {
 function uploadPDFs(event) {
   
   event.preventDefault();
+  changeStatusupload('Uploading ...')
   var nameValue = document.getElementById("customSwitches").checked;
   var formData = new FormData();
   if (!droppedPDF) {window.location.href = '/'; return 0;}
@@ -43,9 +44,13 @@ function uploadPDFs(event) {
   xhr.setRequestHeader('fajne', nameValue);
   xhr.onreadystatechange = function(data) {
     if (xhr.response !== "") {
+      changeStatusupload('Finished successfully ...')
       window.location.href = xhr.response
     }
   };
   xhr.send(formData);
 }
 
+function changeStatusupload(text) {
+  textfromFile.innerHTML = '<div class="uploadtext">' + text + '</div>';
+}
