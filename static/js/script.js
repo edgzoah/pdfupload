@@ -34,6 +34,7 @@ function uploadPDFs(event) {
   event.preventDefault();
   var nameValue = document.getElementById("customSwitches").checked;
   var formData = new FormData();
+  if (!droppedPDF) {window.location.href = '/'; return 0;}
   for (var i = 0, file; (file = droppedPDF[i]); i++) {
     formData.append(PDFinput.name, file, file.name);
   }
