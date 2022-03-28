@@ -4,11 +4,7 @@ var textfromfile = document.getElementById("textfromfile");
 var uploadPDFStatus = document.getElementById("uploadPDFStatus");
 var droppedPDF;
 
-// if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-//   alert(1)
-//  } else {
-//    alert(2)
-//  }
+
 
 function overrideDefault(event) {
   event.preventDefault();
