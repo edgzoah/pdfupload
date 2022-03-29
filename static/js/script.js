@@ -32,7 +32,7 @@ function showFiles(files) {
 function uploadPDFs(event) {
   
   event.preventDefault();
-  changeStatusupload('Converting ...')
+  changeStatusupload('<div class="spinner-border" role-"status"> <span class="sr-only">Loading ... </span></div>')
   var nameValue = document.getElementById("customSwitches").checked;
   var formData = new FormData();
   if (!droppedPDF) {window.location.href = '/'; return 0;}
@@ -52,5 +52,5 @@ function uploadPDFs(event) {
 }
 
 function changeStatusupload(text) {
-  textfromfile.innerHTML = '<div class="uploadtext">' + text + '</div>';
+  textfromfile.innerHTML = '<div class="uploadtext">' +  text + '</div>';
 }
