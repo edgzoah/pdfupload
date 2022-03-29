@@ -1,6 +1,6 @@
 #pip install pymupdf
 #pip install flask
-from flask import Flask , request , render_template , send_file, after_this_request, flash
+from flask import Flask, redirect , request , render_template , send_file, after_this_request
 import os
 from werkzeug.utils import secure_filename
 from datetime import datetime
@@ -40,9 +40,12 @@ def pdf():
     @after_this_request
     def remove_file(response):
         try:
-            os.remove(os.path.join(app.config['UPLOAD_FOLDER'], request.args['file']))
-        except Exception as error:
-            app.logger.error("Error removing or closing downloaded file handle", error)
+            if request.args['file'][len(request.args['file'])-4:len(request.args['file'])] == '.pdf':
+                os.remove(os.path.join(app.config['UPLOAD_FOLDER'], request.args['file']))
+            else:
+                return redirect('/')
+        except Exception:
+            return redirect('/')
         return response
     return send_file(os.path.join(app.config['UPLOAD_FOLDER'], request.args['file']), as_attachment=True)
 
