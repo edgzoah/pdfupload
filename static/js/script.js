@@ -44,7 +44,7 @@ function uploadPDFs(event) {
   xhr.setRequestHeader('fajne', nameValue);
   xhr.onreadystatechange = function(data) {
     if (xhr.response !== "") {
-      changeStatusupload('Finished successfully ...')
+      changeStatusupload('<progress id="file" value="100" max="100"> 100% </progress>')
       window.location.href = xhr.response
     }
   };
