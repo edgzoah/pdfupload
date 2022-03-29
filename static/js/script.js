@@ -32,7 +32,7 @@ function showFiles(files) {
 function uploadPDFs(event) {
   
   event.preventDefault();
-  changeStatusupload('Uploading ...')
+  changeStatusupload('Converting ...')
   var nameValue = document.getElementById("customSwitches").checked;
   var formData = new FormData();
   if (!droppedPDF) {window.location.href = '/'; return 0;}
