@@ -6,48 +6,48 @@ from werkzeug.utils import secure_filename
 from datetime import datetime
 import fitz
 
-UPLOAD_FOLDER = '/var/www/webApp/webApp'
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'F3HUIF23H8923F9H8389FHXKLN'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['UPLOAD_FOLDER'] = '/home/adam/pdfupload/webApp/webApp'
 
 @app.route('/', methods=['POST', 'GET'])
 def sent():
     if request.method == 'POST':
-        uploaded_files = request.files.getlist('PDFs[]')
-        for i in uploaded_files:
-            if (secure_filename(i.filename)[len(secure_filename(i.filename))-4:len(secure_filename(i.filename))]) != ".pdf": return '/'
-        doc1 = fitz.open()
-        now1 = datetime.now()
-        d1 = now1.strftime("%d%m%Y")
-        current_time = now1.strftime("%H%M%S")
-        file_name = str(d1) + '' + str(current_time)
-        for i in uploaded_files:
-            f = secure_filename(i.filename)
-            i.save(os.path.join(app.config['UPLOAD_FOLDER'], f))
-            doc = fitz.open(os.path.join(app.config['UPLOAD_FOLDER'], f))
-            if request.headers['fajne'] == 'true': doc1.insert_pdf(doc, from_page = doc.page_count)
-            else: doc1.insert_pdf(doc, to_page = 0)
-            doc1.save(os.path.join(app.config['UPLOAD_FOLDER'], file_name + '.pdf'))
-            doc.close()
-            os.remove(os.path.join(app.config['UPLOAD_FOLDER'], f))
-        return file_name + '.pdf'
+        try:
+            uploaded_files = request.files.getlist('PDFs[]')
+            doc1 = fitz.open()
+            now1 = datetime.now()
+            d1 = now1.strftime("%d%m%Y")
+            current_time = now1.strftime("%H%M%S")
+            file_name = str(d1) + '' + str(current_time)
+            for i in uploaded_files:
+                if (secure_filename(i.filename)[len(secure_filename(i.filename))-4:len(secure_filename(i.filename))]) == ".pdf":
+                    f = secure_filename(i.filename)
+                    i.save(os.path.join(app.config['UPLOAD_FOLDER'], f))
+                    doc = fitz.open(os.path.join(app.config['UPLOAD_FOLDER'], f))
+                    if request.headers['fajne'] == 'true': doc1.insert_pdf(doc, from_page = doc.page_count)
+                    else: doc1.insert_pdf(doc, to_page = 0)
+                    doc1.save(os.path.join(app.config['UPLOAD_FOLDER'], file_name + '.pdf'))
+                    doc.close()
+                    os.remove(os.path.join(app.config['UPLOAD_FOLDER'], f))
+            return 'file?file=' + file_name + '.pdf'
+        except:
+            return '/'
     return render_template('index.html')
 
-@app.route('/<pdf>')
-def pdf(pdf):
+@app.route('/file')
+def pdf():
     @after_this_request
     def remove_file(response):
         try:
-            os.remove(os.path.join(app.config['UPLOAD_FOLDER'], pdf))
-            pass
+            os.remove(os.path.join(app.config['UPLOAD_FOLDER'], request.args['file']))
         except Exception as error:
             app.logger.error("Error removing or closing downloaded file handle", error)
         return response
-    return send_file(os.path.join(app.config['UPLOAD_FOLDER'], pdf), as_attachment=True)
+    return send_file(os.path.join(app.config['UPLOAD_FOLDER'], request.args['file']), as_attachment=True)
 
 
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
