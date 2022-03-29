@@ -6,7 +6,7 @@ from werkzeug.utils import secure_filename
 from datetime import datetime
 import fitz
 
-UPLOAD_FOLDER = 'C:\\Users\\adamo\\OneDrive\\Obrazy'
+UPLOAD_FOLDER = '/var/www/webApp/webApp'
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'F3HUIF23H8923F9H8389FHXKLN'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
