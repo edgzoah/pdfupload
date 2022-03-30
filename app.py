@@ -32,7 +32,11 @@ def sent():
                     os.remove(os.path.join(app.config['UPLOAD_FOLDER'], f))
             return 'file?file=' + file_name + '.pdf'
         except:
-            return '/'
+            try:
+                os.remove(os.path.join(app.config['UPLOAD_FOLDER'], uploaded_files[0].filename))
+                return '/'
+            except:
+                return '/'
     return render_template('index.html')
 
 @app.route('/file')
