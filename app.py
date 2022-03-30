@@ -8,7 +8,7 @@ import fitz
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'F3HUIF23H8923F9H8389FHXKLN'
-app.config['UPLOAD_FOLDER'] = '/home/adam/pdfupload/webApp/webApp'
+app.config['UPLOAD_FOLDER'] = '/home/jacob/Desktop/Visual-Studio-Code/pdf-sort/upload_folder'
 
 @app.route('/', methods=['POST', 'GET'])
 def sent():
