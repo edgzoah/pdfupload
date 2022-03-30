@@ -1,6 +1,6 @@
 html,body,* { box-sizing: border-box; font-size: 16px;}
 html,body   { height: 100%; text-align: center; height: 100%;}
-body        { padding: 2rem; background: #f8f8f8;}
+body        { background: #f8f8f8;}
 
 .custom-control-input:focus ~ 
 .custom-control-label::before {
@@ -143,5 +143,11 @@ body        { padding: 2rem; background: #f8f8f8;}
 
 #formdrop.fileHover #textfromfile:before {
   opacity: 0.25;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
